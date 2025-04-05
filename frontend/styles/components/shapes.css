@@ -1,0 +1,186 @@
+/* Shape styles */
+.shape {
+    position: absolute;
+    min-width: 50px;
+    min-height: 50px;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e0;
+    cursor: move;
+    user-select: none;
+}
+
+.shape.selected {
+    border-color: #4299e1;
+    box-shadow: 0 0 0 2px rgba(66,153,225,0.3);
+}
+
+.shape.circle {
+    border-radius: 50%;
+}
+
+/* Shape options */
+.shape-options {
+    display: flex;
+    gap: 16px;
+    padding: 8px;
+}
+
+.shape-option, .open-document {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.shape-option:hover, .open-document:hover {
+    border-color: #2b6cb0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+.shape-option::after {
+    content: attr(title);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background: #2b6cb0;
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    margin-top: 4px;
+}
+
+.shape-option:hover::after {
+    opacity: 1;
+}
+
+/* Shape preview */
+.shape-preview {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    background-color: #4299e1;
+    border: 1px solid #3182ce;
+    border-radius: 4px;
+}
+
+.shape-preview.rectangle {
+    border-radius: 0;
+}
+
+.shape-preview.circle {
+    border-radius: 50%;
+}
+
+/* Resize handles */
+.resize-handle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border: 1px solid #4299e1;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.shape:hover .resize-handle {
+    opacity: 1;
+}
+
+.shape:hover .resize-handle:hover {
+    background-color: #4299e1;
+    transform: scale(1.2);
+}
+
+.resize-handle.top-left {
+    top: -4px;
+    left: -4px;
+    cursor: nw-resize;
+}
+
+.resize-handle.top-right {
+    top: -4px;
+    right: -4px;
+    cursor: ne-resize;
+}
+
+.resize-handle.bottom-left {
+    bottom: -4px;
+    left: -4px;
+    cursor: sw-resize;
+}
+
+.resize-handle.bottom-right {
+    bottom: -4px;
+    right: -4px;
+    cursor: se-resize;
+}
+
+.resize-handle.top {
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: n-resize;
+}
+
+.resize-handle.right {
+    top: 50%;
+    right: -4px;
+    transform: translateY(-50%);
+    cursor: e-resize;
+}
+
+.resize-handle.bottom {
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: s-resize;
+}
+
+.resize-handle.left {
+    top: 50%;
+    left: -4px;
+    transform: translateY(-50%);
+    cursor: w-resize;
+}
+
+/* Rotation handle */
+.rotation-handle {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border: 2px solid #4299e1;
+    border-radius: 50%;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: grab;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.shape:hover .rotation-handle {
+    opacity: 1;
+}
+
+.shape:hover .rotation-handle:hover {
+    background-color: #4299e1;
+    transform: translateX(-50%) scale(1.1);
+}
+
+.rotation-handle:active {
+    cursor: grabbing;
+} 

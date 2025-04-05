@@ -1,0 +1,57 @@
+/* Main container layout */
+.container {
+    display: flex;
+    height: calc(100vh - 48px);
+    width: 100vw;
+    margin-top: 48px;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Shape panel layout */
+.shape-panel {
+    width: 200px;
+    background-color: #ffffff;
+    padding: 16px;
+    border-right: 1px solid #e2e8f0;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.shape-panel h2 {
+    margin-bottom: 16px;
+    color: #000000;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Canvas layout */
+.canvas {
+    flex: 1;
+    position: relative;
+    background-color: #f7fafc;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Left navigation layout */
+.left-nav {
+    width: 240px;
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.left-nav h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+} 
