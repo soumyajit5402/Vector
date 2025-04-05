@@ -1,118 +1,129 @@
-# Vector Frontend
+# Vector Graphics Editor Frontend
 
-This is the frontend application for the Vector project, a web-based vector graphics editor.
+A modern vector graphics editor built with vanilla JavaScript and CSS.
 
 ## Project Structure
 
 ```
 frontend/
-├── js/
-│   ├── actions/
-│   │   ├── shapeActions.js      # Shape creation and manipulation
-│   │   ├── interactionHandlers.js # Mouse and keyboard interaction handlers
-│   │   └── historyActions.js    # Undo/redo functionality
-│   ├── state/
-│   │   └── state.js            # Application state management
-│   └── utils/
-│       └── uiUpdates.js        # UI-related utility functions
 ├── styles/
-│   ├── base/
-│   │   └── reset.css           # Reset and base styles
 │   ├── layout/
-│   │   └── container.css       # Main layout and container styles
-│   ├── components/
-│   │   ├── navigation.css      # Navigation bar styles
-│   │   ├── shapes.css         # Shape-related styles
-│   │   ├── info-panel.css     # Information panel styles
-│   │   └── modal.css          # Modal dialog styles
-│   └── main.css               # Main stylesheet with imports
+│   │   ├── base.css      # Base styles, CSS reset, and variables
+│   │   └── container.css # Main layout container styles
+│   └── components/
+│       ├── navigation.css # Top navigation bar styles
+│       ├── toolbar.css    # Left toolbar styles
+│       ├── shapes.css     # Shape elements and controls
+│       ├── info-panel.css # Right info panel styles
+│       └── modal.css      # Modal dialog styles
 ├── server/
-│   └── server.js              # Express server for serving static files
-├── script.js                  # Main application entry point
-└── index.html                # Main HTML file
+│   ├── server.js         # Express server for serving static files
+│   └── index.html        # Main HTML template
+└── script.js             # Main JavaScript file
 ```
 
-## Styles Organization
+## Styling System
 
-The CSS is organized into a modular structure:
+The styling system is organized into modular components using a clean, maintainable CSS architecture.
 
-### Base Styles (base/)
-- `reset.css`: Contains reset styles and base typography
+### Base Styles (`styles/layout/base.css`)
 
-### Layout (layout/)
-- `container.css`: Defines the main container layout, shape panel, canvas, and left navigation
+- CSS reset and base styles
+- Global CSS variables for:
+  - Colors (primary, grays, etc.)
+  - Spacing scale (4px to 24px)
+  - Border radius values
+  - Shadow styles
+  - Transitions
+  - Z-index layers
+  - Component dimensions
 
-### Components (components/)
-- `navigation.css`: Styles for the top navigation bar
-- `shapes.css`: Styles for shapes, resize handles, and shape options
-- `info-panel.css`: Styles for the information panel and shape details
-- `modal.css`: Styles for modal dialogs and document loading
+### Layout (`styles/layout/container.css`)
 
-## Modules
+- Main application layout
+- Shape panel layout
+- Canvas container
+- Left navigation panel
+- Scrollbar customization
 
-### State Management (state.js)
-- Manages the application's global state
-- Defines color palettes and default values
-- Tracks shape selection, interaction states, and history
+### Components
 
-### Shape Actions (shapeActions.js)
-- Creates and manipulates shapes
-- Handles shape copying and pasting
-- Serializes shapes for saving/loading
+1. **Navigation** (`styles/components/navigation.css`)
+   - Top navigation bar
+   - Document name input
+   - Action buttons (Open, Save)
 
-### Interaction Handlers (interactionHandlers.js)
-- Manages mouse events for shapes
-- Handles dragging, resizing, and rotation
-- Updates shape positions and dimensions
+2. **Toolbar** (`styles/components/toolbar.css`)
+   - Tool groups
+   - Tool buttons with icons
+   - Tooltips
+   - Shape tools submenu
+   - Color picker
 
-### History Actions (historyActions.js)
-- Implements undo/redo functionality
-- Tracks command history
-- Manages state changes
+3. **Shapes** (`styles/components/shapes.css`)
+   - Shape styles (rectangle, circle, triangle, line)
+   - Selection states
+   - Resize handles
+   - Rotation handle
+   - Selection box
+   - Canvas container
 
-### UI Updates (uiUpdates.js)
-- Updates the shapes information panel
-- Creates and manages collapsible sections
-- Handles UI state changes
+4. **Info Panel** (`styles/components/info-panel.css`)
+   - Shape properties
+   - Collapsible sections
+   - Dimension controls
+   - Color buttons
+   - Input fields
 
-## Usage
+5. **Modal** (`styles/components/modal.css`)
+   - Modal overlay
+   - Document list grid
+   - Document previews
+   - Empty states
 
-1. Create shapes by clicking the shape options
-2. Manipulate shapes using:
-   - Drag to move
-   - Resize handles to change dimensions
-   - Rotation handle to rotate (rectangles only)
-3. Use keyboard shortcuts:
-   - Ctrl/Cmd + C to copy
-   - Ctrl/Cmd + V to paste
-   - Ctrl/Cmd + Z to undo
-   - Ctrl/Cmd + Shift + Z to redo
-4. Save and load documents using the provided buttons
+## Color System
+
+The application uses a consistent color system:
+
+- Primary: `#2b6cb0` (Blue)
+- Gray scale: 50-900 (from `#f8fafc` to `#1a202c`)
+- Semantic colors for states and interactions
+
+## Spacing System
+
+Consistent spacing scale using CSS variables:
+- `--spacing-1`: 4px
+- `--spacing-2`: 8px
+- `--spacing-3`: 12px
+- `--spacing-4`: 16px
+- `--spacing-5`: 20px
+- `--spacing-6`: 24px
+
+## Component Dimensions
+
+Fixed dimensions for major components:
+- Navigation height: 48px
+- Toolbar width: 48px
+- Info panel width: 250px
+
+## Browser Support
+
+The application uses modern CSS features including:
+- CSS Grid and Flexbox
+- CSS Variables (Custom Properties)
+- CSS Transitions and Transforms
+- Modern pseudo-selectors
 
 ## Development
 
-To modify or extend the application:
-
-1. State changes should be made in `state.js`
-2. New shape actions should be added to `shapeActions.js`
-3. New interaction handlers should be added to `interactionHandlers.js`
-4. UI updates should be implemented in `uiUpdates.js`
-5. History-related changes should be made in `historyActions.js`
-6. New styles should be added to their respective component files in the `styles/` directory
-7. Import any new stylesheets in `main.css`
-
-## Running the Application
-
 1. Install dependencies:
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
 2. Start the development server:
-   ```bash
-   npm run dev    # Runs with hot-reload using nodemon
-   # OR
-   npm start     # Runs without hot-reload
-   ```
+```bash
+npm run dev
+```
 
-3. Open your browser and navigate to `http://localhost:3000` 
+3. Access the application at `http://localhost:3000` 
