@@ -1,5 +1,7 @@
 # Vector Graphics Editor Frontend
+# Vector Graphics Editor Frontend
 
+A modern vector graphics editor built with vanilla JavaScript and CSS.
 A modern vector graphics editor built with vanilla JavaScript and CSS.
 
 ## Project Structure
@@ -16,7 +18,18 @@ frontend/
 │       ├── shapes.css     # Shape elements and controls
 │       ├── info-panel.css # Right info panel styles
 │       └── modal.css      # Modal dialog styles
+│   │   ├── base.css      # Base styles, CSS reset, and variables
+│   │   └── container.css # Main layout container styles
+│   └── components/
+│       ├── navigation.css # Top navigation bar styles
+│       ├── toolbar.css    # Left toolbar styles
+│       ├── shapes.css     # Shape elements and controls
+│       ├── info-panel.css # Right info panel styles
+│       └── modal.css      # Modal dialog styles
 ├── server/
+│   ├── server.js         # Express server for serving static files
+│   └── index.html        # Main HTML template
+└── script.js             # Main JavaScript file
 │   ├── server.js         # Express server for serving static files
 │   └── index.html        # Main HTML template
 └── script.js             # Main JavaScript file
@@ -28,102 +41,106 @@ The styling system is organized into modular components using a clean, maintaina
 
 ### Base Styles (`styles/layout/base.css`)
 
-- CSS reset and base styles
-- Global CSS variables for:
-  - Colors (primary, grays, etc.)
-  - Spacing scale (4px to 24px)
-  - Border radius values
-  - Shadow styles
-  - Transitions
-  - Z-index layers
-  - Component dimensions
+- Global CSS reset
+- Body styles
+- Font settings
+- Viewport configuration
+- Box sizing and margin reset
 
 ### Layout (`styles/layout/container.css`)
 
-- Main application layout
-- Shape panel layout
+- Main application container
 - Canvas container
+- Shape panel layout
 - Left navigation panel
+- Shape options and previews
 - Scrollbar customization
 
 ### Components
 
 1. **Navigation** (`styles/components/navigation.css`)
    - Top navigation bar
-   - Document name input
-   - Action buttons (Open, Save)
+   - Document title
+   - Navigation actions
+   - Open document button
+   - Hover and focus states
 
-2. **Toolbar** (`styles/components/toolbar.css`)
-   - Tool groups
-   - Tool buttons with icons
-   - Tooltips
-   - Shape tools submenu
-   - Color picker
-
-3. **Shapes** (`styles/components/shapes.css`)
-   - Shape styles (rectangle, circle, triangle, line)
+2. **Shapes** (`styles/components/shapes.css`)
+   - Shape base styles
+   - Shape variants (circle, triangle, line)
    - Selection states
    - Resize handles
-   - Rotation handle
+   - Rotation handles
    - Selection box
    - Canvas container
 
-4. **Info Panel** (`styles/components/info-panel.css`)
-   - Shape properties
-   - Collapsible sections
-   - Dimension controls
+3. **Info Panel** (`styles/components/info-panel.css`)
+   - Info panel layout
+   - Shape information
+   - Section headers
+   - Controls
+   - Dimension inputs
    - Color buttons
-   - Input fields
+   - Control buttons
+   - Collapsible sections
 
-5. **Modal** (`styles/components/modal.css`)
-   - Modal overlay
-   - Document list grid
-   - Document previews
-   - Empty states
+4. **Modal** (`styles/components/modal.css`)
+   - Modal dialog
+   - Modal content
+   - Close button
+   - Table styles
+   - Document list
+   - Empty state
+   - Load document button
 
 ## Color System
 
 The application uses a consistent color system:
 
-- Primary: `#2b6cb0` (Blue)
-- Gray scale: 50-900 (from `#f8fafc` to `#1a202c`)
-- Semantic colors for states and interactions
+- Primary: `#4299e1` (Blue)
+- Background: `#ffffff` (White)
+- Borders: `#e6e8eb`, `#e2e8f0` (Light Gray)
+- Text: `#000000`, `#4a5568` (Black, Dark Gray)
+- Hover states: `#f7fafc` (Light Blue)
+- Selected states: `#ebf8ff` (Light Blue)
 
 ## Spacing System
 
-Consistent spacing scale using CSS variables:
-- `--spacing-1`: 4px
-- `--spacing-2`: 8px
-- `--spacing-3`: 12px
-- `--spacing-4`: 16px
-- `--spacing-5`: 20px
-- `--spacing-6`: 24px
-
-## Component Dimensions
-
-Fixed dimensions for major components:
-- Navigation height: 48px
-- Toolbar width: 48px
-- Info panel width: 250px
+Consistent spacing scale:
+- Small: 4px
+- Medium: 8px
+- Large: 16px
+- Extra Large: 24px
 
 ## Browser Support
 
 The application uses modern CSS features including:
 - CSS Grid and Flexbox
-- CSS Variables (Custom Properties)
 - CSS Transitions and Transforms
 - Modern pseudo-selectors
+- Box Shadow and Border Radius
+- Z-index layering
 
 ## Development
 
 1. Install dependencies:
 ```bash
+cd frontend/server
 npm install
 ```
 
 2. Start the development server:
 ```bash
-npm run dev
+npm start
 ```
 
-3. Access the application at `http://localhost:3000` 
+3. Access the application at `http://localhost:3000`
+
+## Features
+
+- Create and edit vector shapes
+- Resize and rotate shapes
+- Customize shape properties
+- Save and load documents
+- Responsive layout
+- Modern UI with smooth transitions 

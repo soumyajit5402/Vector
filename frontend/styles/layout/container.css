@@ -1,4 +1,4 @@
-/* Container */
+/* Container styles */
 .container {
     display: flex;
     height: calc(100vh - 48px);
@@ -138,6 +138,7 @@
 
 .shape-options::-webkit-scrollbar-track {
     background: #f1f1f1;
+    background: #f1f1f1;
     border-radius: 4px;
 }
 
@@ -151,19 +152,46 @@
 }
 
 .shape-option {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    cursor: pointer;
-    margin: 10px;
-    transition: background-color 0.2s;
-    user-select: none;
+    justify-content: center;
+    position: relative;
+    background: white;
+    transition: all 0.2s ease;
 }
 
 .shape-option:hover {
-    background-color: #f7fafc;
+    border-color: #2b6cb0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
 }
 
 .shape-option span {
     font-size: 13px;
     color: #4a5568;
+}
+
+.open-document::after {
+    content: 'Open Document';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background: #2b6cb0;
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    margin-top: 4px;
+}
+
+.open-document:hover::after {
+    opacity: 1;
 } 
