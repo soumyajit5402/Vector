@@ -5,39 +5,45 @@ import (
 	"encoding/json"
 	"net/http"
 	"time"
-
 	"vector/backend/internal/controller"
-	"vector/backend/service"
+	"vector/backend/internal/model"
+	"vector/backend/internal/util"
 )
 
-type DocumentHandler struct {
-	controller *controller.DocumentController
+// documentHandler is a struct that contains a pointer to a DocumentController
+type documentHandler struct {
+	controller controller.DocumentController
 }
 
-func NewDocumentHandler() *DocumentHandler {
-	return &DocumentHandler{
-		controller: controller.NewDocumentController(),
+// DocumentHandler defines the interface for HTTP handlers
+type DocumentHandler interface {
+	SaveDocumentHandler(w http.ResponseWriter, r *http.Request)
+	GetDocumentHandler(w http.ResponseWriter, r *http.Request)
+	ListDocumentsHandler(w http.ResponseWriter, r *http.Request)
+}
+
+// NewDocumentHandler creates a new document handler
+func NewDocumentHandler(controller controller.DocumentController) *documentHandler {	
+	return &documentHandler{
+		controller: controller,
 	}
 }
 
-func (h *DocumentHandler) SaveDocumentHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+// SaveDocumentHandler handles saving a document
+func (h *documentHandler) SaveDocumentHandler(w http.ResponseWriter, r *http.Request) {
+	util.SetCORSHeaders(w)
 
-	if r.Method == http.MethodOptions {
-		w.WriteHeader(http.StatusOK)
+	if util.HandleOptionsRequest(w, r) {
 		return
 	}
 
-	if r.Method != http.MethodPost {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+	if !util.ValidateMethod(w, r, http.MethodPost) {
 		return
 	}
 
-	var doc service.Document
+	var doc model.Document
 	if err := json.NewDecoder(r.Body).Decode(&doc); err != nil {
-		http.Error(w, "Invalid JSON payload", http.StatusBadRequest)
+		util.RespondWithError(w, "Invalid JSON payload", http.StatusBadRequest)
 		return
 	}
 
@@ -45,25 +51,24 @@ func (h *DocumentHandler) SaveDocumentHandler(w http.ResponseWriter, r *http.Req
 	defer cancel()
 
 	if err := h.controller.SaveDocument(ctx, doc.Name, doc.Data); err != nil {
-		http.Error(w, "Failed to save document", http.StatusInternalServerError)
+		util.RespondWithError(w, "Failed to save document", http.StatusInternalServerError)
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Document saved successfully"))
+	util.RespondWithSuccess(w, "Document saved successfully")
 }
 
-func (h *DocumentHandler) GetDocumentHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+// GetDocumentHandler handles retrieving a document
+func (h *documentHandler) GetDocumentHandler(w http.ResponseWriter, r *http.Request) {
+	util.SetCORSHeaders(w)
 
-	if r.Method != http.MethodGet {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+	if !util.ValidateMethod(w, r, http.MethodGet) {
 		return
 	}
 
 	docName := r.URL.Query().Get("name")
 	if docName == "" {
-		http.Error(w, "Document name is required", http.StatusBadRequest)
+		util.RespondWithError(w, "Document name is required", http.StatusBadRequest)
 		return
 	}
 
@@ -72,19 +77,18 @@ func (h *DocumentHandler) GetDocumentHandler(w http.ResponseWriter, r *http.Requ
 
 	doc, err := h.controller.GetDocument(ctx, docName)
 	if err != nil {
-		http.Error(w, "Failed to read document", http.StatusInternalServerError)
+		util.RespondWithError(w, "Failed to read document", http.StatusInternalServerError)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(doc)
-}
+	util.RespondWithJSON(w, doc)
+}	
 
-func (h *DocumentHandler) ListDocumentsHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+// ListDocumentsHandler handles listing all documents
+func (h *documentHandler) ListDocumentsHandler(w http.ResponseWriter, r *http.Request) {
+	util.SetCORSHeaders(w)
 
-	if r.Method != http.MethodGet {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+	if !util.ValidateMethod(w, r, http.MethodGet) {
 		return
 	}
 
@@ -93,10 +97,9 @@ func (h *DocumentHandler) ListDocumentsHandler(w http.ResponseWriter, r *http.Re
 
 	documents, err := h.controller.ListDocuments(ctx)
 	if err != nil {
-		http.Error(w, "Failed to list documents", http.StatusInternalServerError)
+		util.RespondWithError(w, "Failed to list documents", http.StatusInternalServerError)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(documents)
+	util.RespondWithJSON(w, documents)
 } 
