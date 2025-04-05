@@ -5,36 +5,37 @@
     padding: 16px;
     border-left: 1px solid #e2e8f0;
     overflow-y: auto;
+    z-index: 10;
 }
 
 .info-panel h3 {
-    margin-bottom: 16px;
-    color: #000000;
     font-size: 17px;
     font-weight: 600;
-    letter-spacing: -0.2px;
+    color: #000000;
+    margin: 0 0 16px 0;
     padding-bottom: 8px;
     border-bottom: 1px solid #e2e8f0;
+    letter-spacing: -0.2px;
 }
 
 .shape-info {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: #fafbfc;
+    border: 1px solid #e6e8eb;
     border-radius: 6px;
     padding: 8px;
     margin: 8px 0;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
     transition: all 0.2s ease;
 }
 
 .shape-info:hover {
-    border-color: #cbd5e0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-color: #d0d4d9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
 }
 
 .shape-info.selected {
-    border: 1px solid #2b6cb0;
-    background-color: #ebf8ff;
+    border: 1px solid #4299e1;
+    background-color: #f0f7ff;
 }
 
 .shape-header {
@@ -56,7 +57,7 @@
 .shape-name {
     width: 100%;
     padding: 4px 8px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e6e8eb;
     border-radius: 4px;
     font-size: 13px;
     font-weight: 500;
@@ -69,13 +70,13 @@
 
 .shape-name:focus {
     outline: none;
-    border-color: #2b6cb0;
+    border-color: #4299e1;
     background: #ffffff;
     box-shadow: 0 0 0 2px rgba(66,153,225,0.1);
 }
 
 .shape-toggle {
-    color: #a0aec0;
+    color: #718096;
     font-size: 12px;
     transition: transform 0.2s ease;
     padding: 4px;
@@ -105,10 +106,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 0;
+    padding: 6px 0;
     cursor: pointer;
     user-select: none;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e6e8eb;
     background: #ffffff;
     margin-top: 8px;
 }
@@ -123,7 +124,7 @@
 
 .toggle-icon {
     font-size: 12px;
-    color: #a0aec0;
+    color: #718096;
     transition: transform 0.2s ease;
     padding: 4px;
     border-radius: 4px;
@@ -134,7 +135,7 @@
 }
 
 .section-content {
-    padding: 4px 0;
+    padding: 6px 0;
     font-size: 12px;
     color: #4a5568;
     letter-spacing: -0.1px;
@@ -164,20 +165,20 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
-    margin-top: 4px;
+    margin-top: 6px;
 }
 
 .dimension-input,
 .border-input {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
 }
 
 .dimension-input label,
 .border-input label {
     font-size: 11px;
-    color: #718096;
+    color: #666666;
     font-weight: 500;
     letter-spacing: -0.1px;
 }
@@ -186,7 +187,7 @@
 .border-input input {
     width: 100%;
     padding: 4px 8px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e6e8eb;
     border-radius: 4px;
     font-size: 12px;
     color: #000000;
@@ -198,7 +199,7 @@
 .dimension-input input:focus,
 .border-input input:focus {
     outline: none;
-    border-color: #2b6cb0;
+    border-color: #4299e1;
     background: #ffffff;
     box-shadow: 0 0 0 2px rgba(66,153,225,0.1);
 }
@@ -207,8 +208,8 @@
 .color-buttons {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 4px;
-    margin-top: 4px;
+    gap: 6px;
+    margin-top: 6px;
 }
 
 .color-button {
@@ -222,7 +223,7 @@
 
 .color-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .color-button:active {
@@ -230,42 +231,38 @@
 }
 
 .control-button {
-    padding: 4px 8px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    width: 100%;
+    padding: 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
     border-radius: 4px;
-    font-size: 12px;
-    color: #4a5568;
     cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    font-size: 14px;
+    transition: background-color 0.2s;
 }
 
 .control-button:hover {
-    background-color: #f7fafc;
+    background-color: #45a049;
 }
 
 .paste-button {
-    padding: 4px 8px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
+    padding: 10px 20px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
     border-radius: 4px;
-    font-size: 12px;
-    color: #4a5568;
     cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .paste-button:hover {
-    background-color: #f7fafc;
+    background-color: #1976D2;
 }
 
 .paste-button:disabled {
-    opacity: 0.5;
+    background-color: #BDBDBD;
     cursor: not-allowed;
 } 

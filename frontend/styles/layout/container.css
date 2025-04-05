@@ -104,11 +104,11 @@
 
 .left-nav {
     width: 250px;
-    background: #ffffff;
+    background: #fff;
     border-right: 1px solid #e2e8f0;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 48px);
+    height: calc(100vh - 50px);
     position: relative;
 }
 
@@ -119,7 +119,7 @@
     font-weight: 600;
     color: #2d3748;
     border-bottom: 1px solid #e2e8f0;
-    background: #ffffff;
+    background: #fff;
     position: sticky;
     top: 0;
     z-index: 2;
@@ -132,13 +132,12 @@
     scroll-behavior: smooth;
 }
 
-/* Scrollbar styles */
 .shape-options::-webkit-scrollbar {
     width: 8px;
 }
 
 .shape-options::-webkit-scrollbar-track {
-    background: #f7fafc;
+    background: #f1f1f1;
     border-radius: 4px;
 }
 
@@ -149,4 +148,22 @@
 
 .shape-options::-webkit-scrollbar-thumb:hover {
     background: #a0aec0;
+}
+
+.shape-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.2s;
+    user-select: none;
+}
+
+.shape-option:hover {
+    background-color: #f7fafc;
+}
+
+.shape-option span {
+    font-size: 13px;
+    color: #4a5568;
 } 
