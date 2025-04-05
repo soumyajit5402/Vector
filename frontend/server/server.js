@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// Serve static files from the frontend directory
-app.use(express.static(__dirname));
+// Serve static files from the frontend root directory
+app.use(express.static(path.join(__dirname, '..')));
 
 // Handle all routes by sending the index.html file
 app.get('*', (req, res) => {
