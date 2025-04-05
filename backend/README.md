@@ -1,72 +1,126 @@
 # Vector Backend
 
-A Go-based backend service for the Vector application.
+This is the backend service for the Vector project, providing document storage and retrieval functionality.
 
-## Directory Structure
+## Project Structure
 
 ```
 backend/
-├── internal/           # Internal packages
-│   ├── controller/    # Business logic implementation
-│   └── handler/       # HTTP request handlers
-├── service/           # Service interfaces
-│   └── documentService.go
-├── server/            # Server entry point
-│   └── main.go       # Main server file
-└── go.mod            # Go module definition
+├── internal/
+│   ├── handler/
+│   │   └── documentHandler.go    # HTTP request handlers
+│   ├── controller/
+│   │   └── documentController.go # Business logic layer
+│   ├── repository/
+│   │   └── documentRepository.go # Data storage layer
+│   └── utils/
+│       └── http.go              # Common HTTP utilities
+├── server/
+│   └── main.go                  # Application entry point
+└── go.mod                       # Go module definition
 ```
 
-## Setup
+## Architecture
 
-1. Navigate to the backend directory:
-```bash
-cd backend
-```
+The backend follows a clean architecture pattern with three main layers:
 
-2. Install Go dependencies:
-```bash
-go mod download
-```
+### Handler Layer (documentHandler.go)
+- Handles HTTP requests and responses
+- Manages CORS and request validation
+- Converts between HTTP and domain formats
+- Exposes endpoints:
+  - POST `/saveDocument`: Save a document
+  - GET `/getDocument`: Retrieve a document
+  - GET `/listDocuments`: List all documents
 
-3. Start the server:
-```bash
-go run server/main.go
-```
+### Controller Layer (documentController.go)
+- Implements business logic
+- Manages document operations
+- Handles data transformation
+- Provides interface:
+  - `SaveDocument(ctx context.Context, name, data string) error`
+  - `GetDocument(ctx context.Context, name string) (*Document, error)`
+  - `ListDocuments(ctx context.Context) ([]DocumentMetadata, error)`
 
-The backend will run on http://localhost:8080
+### Repository Layer (documentRepository.go)
+- Manages data persistence
+- Handles file system operations
+- Provides interface:
+  - `Save(name string, data []byte) error`
+  - `Get(name string) ([]byte, error)`
+  - `List() ([]fs.FileInfo, error)`
+
+## Data Storage
+
+Documents are stored as JSON files in the `~/Desktop/Artefacts` directory with the following structure:
+- Each document is saved as a separate JSON file
+- Filenames are in the format: `{documentName}.json`
+- File content includes document data and metadata
 
 ## API Endpoints
 
 ### Save Document
-- `POST /saveDocument`
-- Request Body:
-```json
+```
+POST /saveDocument
+Content-Type: application/json
+
 {
-    "name": "document_name",
-    "data": "document_data"
+    "name": "string",
+    "data": "string"  // JSON stringified document data
 }
 ```
 
 ### Get Document
-- `GET /getDocument?name=<document_name>`
-- Query Parameters:
-  - `name`: Document name
+```
+GET /getDocument?name=documentName
+```
 
 ### List Documents
-- `GET /listDocuments`
-- Returns array of document metadata
+```
+GET /listDocuments
+```
 
-## Document Storage
+## Development
 
-Documents are stored in `~/Desktop/Artefacts` as JSON files.
+To modify or extend the backend:
+
+1. HTTP-related changes should be made in the handler layer
+2. Business logic should be added to the controller layer
+3. Storage operations should be implemented in the repository layer
+4. Common utilities should be placed in the utils package
+
+## Building and Running
+
+1. Build the backend:
+   ```bash
+   cd backend
+   go build -o vector-backend server/main.go
+   ```
+
+2. Run the server:
+   ```bash
+   ./vector-backend
+   ```
+
+The server will start on port 8080 and create the Artefacts directory if it doesn't exist.
 
 ## Error Handling
 
-The service handles:
-- Invalid request methods
-- Missing/invalid parameters
-- File system operations
-- JSON parsing errors
+The backend implements comprehensive error handling:
+- Invalid requests return appropriate HTTP status codes
+- File system errors are properly propagated
+- CORS errors are handled gracefully
+- All errors include descriptive messages
+
+## Dependencies
+
+- Go 1.20 or higher
+- Standard library packages:
+  - `net/http`
+  - `encoding/json`
+  - `io/fs`
+  - `os`
+  - `path/filepath`
 
 ## CORS Configuration
 
