@@ -77,11 +77,11 @@
 }
 
 .document-title:hover {
-    background-color: #f7fafc;
+    cursor: text;
 }
 
 .document-title:focus {
     outline: none;
     background-color: #ffffff;
-    box-shadow: 0 0 0 2px rgba(66,153,225,0.1);
+    box-shadow: rgba(66, 153, 225, 0.1) 0px 4px 6px;
 } 

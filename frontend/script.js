@@ -320,17 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="shape-toggle" onclick="toggleShapeCollapse(${index})">▼</span>
                 </div>
                 <div class="shape-content">
-                    <div class="section-header ${shapeSections.has('edges') ? 'collapsed' : ''}">
-                        <h4>Edges</h4>
-                        <span class="toggle-icon">▼</span>
-                    </div>
-                    <div class="section-content">
-                        <p>Top: ${Math.round(shape.offsetTop)}px</p>
-                        <p>Left: ${Math.round(shape.offsetLeft)}px</p>
-                        <p>Right: ${Math.round(shape.offsetLeft + shape.offsetWidth)}px</p>
-                        <p>Bottom: ${Math.round(shape.offsetTop + shape.offsetHeight)}px</p>
-                    </div>
-
                     <div class="section-header ${shapeSections.has('dimensions') ? 'collapsed' : ''}">
                         <h4>Dimensions</h4>
                         <span class="toggle-icon">▼</span>
